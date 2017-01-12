@@ -64,7 +64,7 @@ router.get('/home', function(req, res) {
 					    console.log(doc);
 					  }
 				});
-					 res.render('home');// Complete Scraping Text.
+					 res.render('Scrape Completed');// Complete Scraping Text.
     	});
 
     var handleObj = {articles: resultsArray};
@@ -86,7 +86,7 @@ router.get('/articles', function(req, res) {
     });
 });
 //.get Articles by it's objectId
-router.get('/articles/:id', function(req, res) {
+router.get('/articles/:ID', function(req, res) {
     //Using the id passed in the id parameter and find the matching one in our DB.
     Article.findOne({ '_id': req.params.id })
         // Populate all of the notes.
