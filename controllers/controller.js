@@ -14,6 +14,7 @@ var mongoose = require('mongoose');
 var cheerio = require('cheerio');
 
 // Database configuration with Mongoose
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://heroku_8wf2llsk:6jcbt1d2f95lk6f6308p3vgiha@ds161028.mlab.com:61028/heroku_8wf2llsk');
 var db = mongoose.connection;
 
@@ -64,7 +65,7 @@ router.get('/home', function(req, res) {
 					    console.log(doc);
 					  }
 				});
-					 res.render('Scrape Completed');// Complete Scraping Text.
+					 return res.render('Scrape Completed');// Complete Scraping Text.
     	});
 
     var handleObj = {articles: resultsArray};
