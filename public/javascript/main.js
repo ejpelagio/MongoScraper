@@ -46,3 +46,54 @@ $(document).on('click', 'h3', function(){
     });
 });
 
+// When you click the #deletenote button
+$(document).on('click', '#deletenote', function(){
+  // Grab the id associated with the article from the submit button
+
+  var thisId = $(this).attr('data-id');
+  console.log(thisId);
+  // Run a POST request to change the note, using what's entered in the inputs
+  $.ajax({
+    method: "POST",
+    url: "/deletenote/" + thisId
+  })
+    //  .done
+    .done(function() {
+        // Value taken from title input
+        $('#titleinput').val("");
+         // Value taken from note textarea
+        $('#bodyinput').val("");
+    });
+
+  
+
+});
+
+// When you click the savenote button
+$(document).on('click', '#savenote', function(){
+  // Grabbing the id associated with the article from the submit button.
+  var thisId = $(this).attr('data-id');
+
+  // Run a POST request to change the note, using what's entered in the inputs.
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      // Value taken from title input.
+      title: $('#titleinput').val(), 
+      // Value taken from the Note Textarea.
+      body: $('#bodyinput').val() 
+    }
+  })
+    // .done
+    .done(function( data ) {
+      // Console log the response
+      console.log(data);
+      // Empty the Notes Section
+         $('#notes').empty();
+         $('#titleinput').val("");
+         $('#bodyinput').val("");
+    });
+
+});
+     
