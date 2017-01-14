@@ -12,7 +12,7 @@ $.getJSON('/articles', function(data) {
 $(document).on('click', 'h3', function(){
 
   // Empty the notes from the note section
-  $('#results').empty();
+  $('#notes').empty();
  // Save the id from the <h3> tag
   var articleID = $(this).attr('data-id');
 
@@ -26,18 +26,18 @@ $(document).on('click', 'h3', function(){
       //Console.log my data
       console.log(data);
       // The title of the article
-      $('#results').append('<h3>' + data.title + '</h3>');
+      $('#notes').append('<h3>' + data.title + '</h3>');
       // An input to enter a new title
-      $('#results').append('<input id="titleinput" name="title" >');
+      $('##notes').append('<input id="titleinput" name="title" >');
       // Textarea to add a new Note.
-      $('#results').append('<textarea id="bodyinput" name="body"></textarea>');
+      $('#notes').append('<textarea id="bodyinput" name="body"></textarea>');
       // A button to submit a new note, with the id of the article saved to it
-      $('#results').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
+      $('#notes').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
       // If there's a note in the article
       if(data.note){
         console.log(data.note);
         // A button to delete the notes on the article
-      $('#results').append('<button data-id="' + data.note._id + '" id="deletenote">Delete Note</button>');
+      $('#notes').append('<button data-id="' + data.note._id + '" id="deletenote">Delete Note</button>');
         // Place the title of the note in the title input
         $('#titleinput').val(data.note.title);
         // Place the body of the note in the body textarea

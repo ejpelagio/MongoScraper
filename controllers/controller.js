@@ -14,7 +14,7 @@ var mongoose = require('mongoose');
 var cheerio = require('cheerio');
 
 // Database configuration with Mongoose
-mongoose.Promise = global.Promise;
+//mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://heroku_8wf2llsk:6jcbt1d2f95lk6f6308p3vgiha@ds161028.mlab.com:61028/heroku_8wf2llsk');
 var db = mongoose.connection;
 
@@ -42,6 +42,7 @@ router.get('/home', function(req, res) {
   request('http://www.foxnews.com/sports.html', function(error, response, html) {
   	// Then we load that into cheerio and save it.
     var $ = cheerio.load(html);
+
     var resultsArray = [];
      // Here we are going to grab every <h3> article tag.
     $('h3').each(function(i, element) {
@@ -65,11 +66,11 @@ router.get('/home', function(req, res) {
 					    console.log(doc);
 					  }
 				});
-					 return res.render('Scrape Completed');// Complete Scraping Text.
+					 //return res.render('home');// Complete Scraping Text.
     	});
 
     var handleObj = {articles: resultsArray};
-    console.log(handleObj);
+    console.log(handleObj); 
     res.render('index.handlebars', handleObj);
   });
 });
@@ -91,7 +92,7 @@ router.get('/articles/:ID', function(req, res) {
     //Using the id passed in the id parameter and find the matching one in our DB.
     Article.findOne({ '_id': req.params.id })
         // Populate all of the notes.
-        .populate('Note')
+        .populate('note')
         // Execute our query
         .exec(function(err, doc) {
             if (err) {
@@ -105,7 +106,7 @@ router.get('/articles/:ID', function(req, res) {
 //Create a newNote
 router.post('/articles/:id', function(req, res) {
     // Create a new note and pass the req.body entry.
-    var newNote = new Comment(req.body);
+    var newNote = new Note(req.body);
     //Save the new Note to the DB.
     newNote.save(function(err, doc) {
         if (err) {
@@ -117,7 +118,7 @@ router.post('/articles/:id', function(req, res) {
         	//Using the ArticleId passed in the URL,
         	//Find the matching ArticleId in our DB,
         	//Update it
-            Article.findOneAndUpdate({ '_id': req.params.id }, { 'Note': doc._id })
+            Article.findOneAndUpdate({ '_id': req.params.id }, { 'note': doc._id })
                 .exec(function(err, doc) {
                     if (err) {
                     	// Consolog any errors or log the doc
