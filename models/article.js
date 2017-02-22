@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
   title: {
     type: String,
+    unique:true,
     required: true
   },
   // link 
@@ -16,7 +17,7 @@ var ArticleSchema = new Schema({
     required: true
   },
   //
-  Note  : {
+  note  : {
       type: Schema.Types.ObjectId,
       ref: 'Note'
   }

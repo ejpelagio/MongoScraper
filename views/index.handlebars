@@ -1,0 +1,32 @@
+
+
+
+<div class="row">
+<div class="jumbotron text-center">
+  <div class="container-fluid">
+    <h1 class="page-title">Latest Sports News</h1>
+    <h2>Click an article title to view and post comments</h2>
+    </div
+  </div>
+
+</div>
+  <div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-9">
+
+            {{#each articles}}
+              <h3 data-id="{{this._id}}" class="article-title">{{this.title}}</h3>
+              <a target="_blank" href="{{this.link}}"><button type="button" class="btn btn-info btn-lg">Read Article</button></a>
+              <hr>
+            {{/each}}
+        </div>
+        <div class="col-sm-3">
+          <h3>Comments...</h3>
+          <div id="results"></div>
+        </div>
+    </div>
+</div>
+  </div>
+
+  
